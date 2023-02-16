@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: load-balancer
+  name: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: load-balancer
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: load-balancer
+    spec:
+      containers:
+      - image: choco85470/myapp:v1
+        name: app
+        command: ["/bin/sh"]
+        args: ["-c", "yarn install && yarn run dev"]
+        #Fn::Base64:
+        #  !Sub |
+        #  yarn install && yarn run dev
+        ports:
+        - containerPort: 3000
+        workingDir: "/app"
+        volumes:
+          - ./:/app
+        environment:
+          MYSQL_HOST: mysql
+          MYSQL_USER: root
+          MYSQL_PASSWORD: secret
+          MYSQL_DB: todos
+
+        #env:
+        #  - name: MYSQL_HOST
+        #    value: "mysql"
+        #  - name: MYSQL_USER
+        #    value: "root"
+        #  - name: MYSQL_PASSWORD
+        #    value: "secret"
+        #  - name: MYSQL_DB
+        #    value: "todos"
+
+        #env:
+        #  - name: MYSQL_DB
+        #    value: todos
+        #  - name: MYSQL_HOST
+        #    value: mysql
+        #  - name: MYSQL_PASSWORD
+        #    value: secret
+        #  - name: MYSQL_USER
+        #    value: root
+      - image: mysql:8.0
+        name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "secret"
+        - name: MYSQL_DATABASE
+          value: "todos"
+    volumes:
+      todo-mysql-data:
+
+# Il écoute sur le port 3000, mais le pod n'a pas de connexion SQL
