@@ -15,12 +15,12 @@ winget install -e --id Kubernetes.kubectl
 ![image](https://user-images.githubusercontent.com/73076854/220912055-35a095bd-ddf2-4bcf-868e-01f337456b57.png)
 
 ## Installer Kubernetes-Dashboard
-```bash
+```powershell
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
 ```
 
 ## Lancer le proxy Kubernetes
-```bash
+```powershell
 kubectl proxy
 ```
 ![image](https://user-images.githubusercontent.com/73076854/220912329-1e4455ed-8ff0-40bb-a37b-0ad1ad695de4.png)
@@ -62,7 +62,7 @@ kubectl apply -f sample-user.yaml
 kubectl apply -f cluster.yaml
 ```
 ## Génération du token de connexion
-```bash
+```powershell
 kubectl -n kubernetes-dashboard create token admin-user
 ```
 ## Insérer le token générer dans le navigateur (Méthode Jeton) :
@@ -72,7 +72,7 @@ eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.......
 ![image](https://user-images.githubusercontent.com/73076854/220912911-b6f6ac53-3357-4135-95f0-aa55e4f50253.png)
 
 ## Insérer le token générer dans le navigateur (Méthode Kubeconfig) :
-```bash
+```powershell
 $TOKEN="eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9......."
 kubectl config set-credentials docker-for-desktop --token="${TOKEN}"
 kubectl config set-credentials docker-desktop --token="${TOKEN}"
@@ -82,7 +82,7 @@ kubectl config set-credentials docker-desktop --token="${TOKEN}"
 ## Insérer le token générer dans le navigateur (Méthode 2 Kubeconfig) :
 Editer le fichier de config dans C:\Users\Username\.kube\config
 Chercher les lignes :
-```bash
+```yaml
 […]
 - name: docker-desktop
   user:
@@ -90,7 +90,7 @@ Chercher les lignes :
 […]
 ```
 Ajouter la ligne suivante :
-```bash
+```yaml
 […]
 - name: docker-desktop
   user:
@@ -100,7 +100,7 @@ Ajouter la ligne suivante :
 ```
 
 ## (BONUS) Pour supprimer ServiceAccount et ClusterRoleBinding :
-```bash
+```powershell
 kubectl -n kubernetes-dashboard delete serviceaccount admin-user
 kubectl -n kubernetes-dashboard delete clusterrolebinding admin-user
 ```
