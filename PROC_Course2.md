@@ -199,7 +199,7 @@ Kubectl expose deployment app –type=LoadBalancer –name=app
 ![image](https://user-images.githubusercontent.com/73076854/220915637-57a21f06-bd1c-4a65-aa42-b1203302a332.png)
 
 ## Publier notre code sur notre dépôt 
-```bash
+```git
 git config --global user.name "username"
 git config --global user.email username@mail.com
 Git init app/ (to create the git repo in the app directory)
