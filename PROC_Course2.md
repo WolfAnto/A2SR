@@ -80,7 +80,7 @@ kubectl config set-credentials docker-desktop --token="${TOKEN}"
 ![image](https://user-images.githubusercontent.com/73076854/220913036-9dfd663e-aa06-477f-addf-edc9b8fab474.png)
 
 ## Insérer le token générer dans le navigateur (Méthode 2 Kubeconfig) :
-Editer le fichier de config dans C:\Users\<Username>\.kube\config
+Editer le fichier de config dans C:\Users\Username\.kube\config
 Chercher les lignes :
 ```bash
 […]
