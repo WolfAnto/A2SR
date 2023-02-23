@@ -119,7 +119,7 @@ Se rendre sur le dashboard kubernetes.
 
 ![image](https://user-images.githubusercontent.com/73076854/220914879-ae9262e4-18e8-42fb-be73-ab5180c6c11a.png)
 
-## : Vérifier dans les logs du Pod, la trace d’un ping
+## Vérifier dans les logs du Pod, la trace d’un ping
 Cependant en naviguant dans Kubernetes Dashboard a la recherhe des logs de notre Cluster et de notre application, nous remarquons aucune trace d’un ping.
 Il est possible que la consigne ne soit pas claire, et qu’il faut ouvrir une console dans notre application et effectuer un ping.
 
@@ -136,30 +136,75 @@ Kubectl delete pod myapp
 
 ![image](https://user-images.githubusercontent.com/73076854/220915130-e8be472c-a11f-4893-8225-86503b05d51e.png)
 
-```bash
+## Créer un fichier deployment.yaml (Sans la persistance BDD)
 
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: load-balancer
+  name: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: load-balancer
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: load-balancer
+    spec:
+      containers:
+      - image: choco85470/myapp:v1
+        name: app
+        command: ["/bin/sh"]
+        args: ["-c", "yarn install && yarn run dev"]
+        ports:
+        - containerPort: 3000
+        workingDir: "/app"
+        volumes:
+          - ./:/app
+        environment:
+          MYSQL_HOST: mysql
+          MYSQL_USER: root
+          MYSQL_PASSWORD: secret
+          MYSQL_DB: todos
+      - image: mysql:8.0
+        name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "secret"
+        - name: MYSQL_DATABASE
+          value: "todos"
+    volumes:
+      todo-mysql-data:
 ```
 
+## Lancer notre application
 ```bash
-
+Kubectl apply -f deployment.yaml
 ```
 
-```bash
+### En cas d’erreur, le faire via l’interface graphique Kubernetes Dashboard
 
+![image](https://user-images.githubusercontent.com/73076854/220915538-2c4a5ce2-4f1c-4496-ad4a-515ba9fba863.png)
+![image](https://user-images.githubusercontent.com/73076854/220915566-55e0acd5-48e0-467a-a388-e36cce218722.png)
+
+## Accéder à notre application
+Notre application n’est pas accessible depuis notre navigateur. Pour régler ce problème nous devons créer un Service permettant de faire du Port Forwarding pour pouvoir utiliser notre application de todolist.
+```bash
+Kubectl expose deployment app –type=LoadBalancer –name=app
 ```
+![image](https://user-images.githubusercontent.com/73076854/220915637-57a21f06-bd1c-4a65-aa42-b1203302a332.png)
 
+## Publier notre code sur notre dépôt 
 ```bash
-
-```
-
-```bash
-
-```
-
-```bash
-
-```
-
-```bash
-
+git config --global user.name "username"
+git config --global user.email username@mail.com
+Git init app/ (to create the git repo in the app directory)
+git add . (to add all the files in the current directory in the .git)
+git commit -m "Commit Cours 2" (to commit modification)
+git remote add origin https://github.com/username/A2SR.git
+git push -u origin main (to push the main branch)
 ```
