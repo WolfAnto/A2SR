@@ -32,7 +32,7 @@ http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kube
 
 ## Création d'un compte "Service Account"
 Créer un fichier sample-user.yaml
-```bash
+```yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -42,7 +42,7 @@ metadata:
 
 ## Création d'un ClusterRoleBinding
 Créer un fichier clusterrolebinding.yaml
-```bash
+```yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
@@ -61,7 +61,7 @@ subjects:
 kubectl apply -f sample-user.yaml
 kubectl apply -f cluster.yaml
 ```
-## : Génération du token de connexion
+## Génération du token de connexion
 ```bash
 kubectl -n kubernetes-dashboard create token admin-user
 ```
