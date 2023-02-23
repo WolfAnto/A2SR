@@ -108,6 +108,58 @@ kubectl -n kubernetes-dashboard delete clusterrolebinding admin-user
 ## Voici l’aperçu de l’interface Kubernetes Dashboard
 ![image](https://user-images.githubusercontent.com/73076854/220913354-aae580d0-e615-46fc-9ffb-0b4fc4dc4b0c.png)
 
+## Déployer le fichier pod.yaml
+```bash
+Kubectl apply -f pod.yaml
+```
+![image](https://user-images.githubusercontent.com/73076854/220914763-d11cb9ed-91bc-4771-a045-51100e1e8ce5.png)
+
+## Vérifier si le Pod est installer et fonctionnel 
+Se rendre sur le dashboard kubernetes.
+
+![image](https://user-images.githubusercontent.com/73076854/220914879-ae9262e4-18e8-42fb-be73-ab5180c6c11a.png)
+
+## : Vérifier dans les logs du Pod, la trace d’un ping
+Cependant en naviguant dans Kubernetes Dashboard a la recherhe des logs de notre Cluster et de notre application, nous remarquons aucune trace d’un ping.
+Il est possible que la consigne ne soit pas claire, et qu’il faut ouvrir une console dans notre application et effectuer un ping.
+
+![image](https://user-images.githubusercontent.com/73076854/220914949-681883f6-abc7-424a-b3a8-63e9cccf70d5.png)
+![image](https://user-images.githubusercontent.com/73076854/220914962-78297ba1-4be7-4f69-a5b3-002aab8a56ce.png)
+
+## Supprimer le Pod
+```powershell
+Kubectl delete pod myapp
+```
+![image](https://user-images.githubusercontent.com/73076854/220915065-6cf07afb-2659-4546-9a42-f3607886dd14.png)
+
+### Sinon via l’interface Kubernetes Dashboard
+
+![image](https://user-images.githubusercontent.com/73076854/220915130-e8be472c-a11f-4893-8225-86503b05d51e.png)
+
+```bash
+
+```
+
+```bash
+
+```
+
+```bash
+
+```
+
+```bash
+
+```
+
+```bash
+
+```
+
+```bash
+
+```
+
 ```bash
 
 ```
