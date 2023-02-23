@@ -9,7 +9,7 @@
 ![image](https://user-images.githubusercontent.com/73076854/220911992-b651b34e-2db6-41e7-b6fe-597693af8d5b.png)
 
 ## Mettre à jour Kubernetes
-```bash
+```powershell
 winget install -e --id Kubernetes.kubectl
 ```
 ![image](https://user-images.githubusercontent.com/73076854/220912055-35a095bd-ddf2-4bcf-868e-01f337456b57.png)
