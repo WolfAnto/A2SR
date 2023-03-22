@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-service
+spec:
+  containers:
+    - name: app-service
+      image: choco85470/myapp:v1
+      command: ["/bin/sh"]
+      args: ["-c", "yarn install && yarn run dev"]
+      ports:
+        - containerPort: 3000
+      workingDir: "/app"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-service
+spec:
+  selector:
+    app: app-service
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+  type: LoadBalancer
