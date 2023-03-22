@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pingapp
+spec:
+  containers:
+    - name: ping
+      image: willfarrell/ping
+      env:
+        - name: "HOSTNAME"
+          value: "8.8.8.8"
+        - name: "TIMEOUT"
+          value: "300"
