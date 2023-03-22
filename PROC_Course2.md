@@ -109,6 +109,8 @@ kubectl -n kubernetes-dashboard delete clusterrolebinding admin-user
 ```bash
 kubectl apply -f pod.yaml
 ```
+![image](https://user-images.githubusercontent.com/73076854/226839141-51c2d8a0-be79-40b6-9976-2c9da51f1d7e.png)
+
 ## Vérifier les logs du Pod pour apercevoir un Ping
 ![image](https://user-images.githubusercontent.com/73076854/226838265-465a4bb1-f060-4bbc-8b44-fdf985b0a856.png)
 
